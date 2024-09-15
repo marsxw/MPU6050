@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "i2c.h": "c",
+        "log.h": "c",
+        "segger_rtt.h": "c",
+        "stm32f407xx.h": "c"
+    }
+}
