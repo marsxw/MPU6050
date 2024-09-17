@@ -24,8 +24,11 @@
 "mpu6050\stm32f4xx_hal_tim_ex.o"
 "mpu6050\system_stm32f4xx.o"
 "mpu6050\app.o"
+"mpu6050\mpu6050.o"
 "mpu6050\segger_rtt.o"
 "mpu6050\segger_rtt_printf.o"
+"mpu6050\inv_mpu.o"
+"mpu6050\inv_mpu_dmp_motion_driver.o"
 --strict --scatter "MPU6050\MPU6050.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

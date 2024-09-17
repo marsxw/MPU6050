@@ -3,6 +3,13 @@
         "i2c.h": "c",
         "log.h": "c",
         "segger_rtt.h": "c",
-        "stm32f407xx.h": "c"
+        "stm32f407xx.h": "c",
+        "stm32f4xx.h": "c",
+        "app.h": "c",
+        "mpu6050.h": "c",
+        "inv_mpu.h": "c",
+        "inv_mpu_dmp_motion_driver.h": "c",
+        "stdbool.h": "c",
+        "math.h": "c"
     }
 }

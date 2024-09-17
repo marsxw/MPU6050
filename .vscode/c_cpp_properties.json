@@ -9,6 +9,7 @@
                 "${workspaceFolder}/Drivers/CMSIS/Include",
                 "${workspaceFolder}/Drivers/STM32F4xx_HAL_Driver/Inc",
                 "${workspaceFolder}/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/EMPL",
                 "${workspaceFolder}/MDK-ARM/RTE/_MPU6050",
                 "${workspaceFolder}/RTT",
             ],

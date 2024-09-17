@@ -68,6 +68,7 @@ Revision: $Rev: 17697 $
 
 #include <stdlib.h>
 #include <stdarg.h>
+#include <math.h>
 
 #define FORMAT_FLAG_LEFT_JUSTIFY (1u << 0)
 #define FORMAT_FLAG_PAD_ZERO (1u << 1)
@@ -524,20 +525,33 @@ int SEGGER_RTT_vprintf(unsigned BufferIndex, const char *sFormat, va_list *pPara
         _StoreChar(&BufferDesc, '%');
         break;
 
-      case 'f': // 添加输出浮点数的功能。默认带两位小数。
+      case 'f': // 添加输出浮点数的功能。支持动态设置小数位数。
       case 'F':
       {
         float fv = (float)va_arg(*pParamList, double); // 取出输入的浮点数值
+        int decimals = NumDigits > 0 ? NumDigits : 3;  // 获取小数位数，默认是 3 位
+
         if (fv < 0)
-          _StoreChar(&BufferDesc, '-');                                     // 判断正负号
-        v = abs((int)fv);                                                   // 取正整数部分
-        _PrintInt(&BufferDesc, v, 10u, NumDigits, FieldWidth, FormatFlags); // 显示整数
-        _StoreChar(&BufferDesc, '.');                                       // 显示小数点
-        v = abs((int)(fv * 100));
-        v = v % 100;
-        _PrintInt(&BufferDesc, v, 10u, 2, FieldWidth, FormatFlags); // 显示小数点后两位
+        {
+          _StoreChar(&BufferDesc, '-'); // 判断正负号
+          fv = fabs(fv);                // 取浮点数的绝对值
+        }
+
+        int integerPart = (int)fv;                                            // 取整数部分
+        _PrintInt(&BufferDesc, integerPart, 10u, 0, FieldWidth, FormatFlags); // 显示整数，不需要 NumDigits
+
+        _StoreChar(&BufferDesc, '.'); // 显示小数点
+
+        // 计算小数部分
+        float fractionalPart = fv - integerPart;                         // 提取小数部分
+        int fractionalValue = (int)(fractionalPart * pow(10, decimals)); // 根据小数位数获取小数部分
+
+        // 显示小数部分，不需要 FieldWidth 和 FormatFlags 对小数部分产生影响
+        _PrintInt(&BufferDesc, fractionalValue, 10u, decimals, 0, 0); // 显示小数部分，确保不显示多余的零
+
         break;
       }
+
       default:
         break;
       }
