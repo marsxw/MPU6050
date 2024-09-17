@@ -14,4 +14,8 @@
 1. **Temperature Compensation**: Implement temperature compensation using the sensor's internal temperature readings to correct drift and improve the accuracy of attitude estimation.
 2. **Kalman Filtering**: Integrate a Kalman filter to smooth the attitude estimation and reduce noise, improving overall performance.
 
- 
+## Visualization
+Using Jlink RTT-Viewer to visualize the MPU6050 sensor data.
+<div align="center">
+  <img src="./rtt-shot.png" alt="RTT connect params" width="500"/>
+</div>
